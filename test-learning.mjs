@@ -1,0 +1,40 @@
+import assert from 'node:assert/strict';
+import {failureExample,compareDelivery,loadEstimate} from './dist/learning-models.mjs';
+import {concepts,phases} from './dist/learning-data.mjs';
+import {Experience} from './dist/experience.mjs';
+
+const main=new Experience();
+main.play();
+for(let i=0;i<100;i++)main.tick(.05);
+const userState=JSON.stringify({road:main.sim.road.snapshot(),time:main.sim.time,nodes:main.sim.nodes,stats:main.sim.stats});
+const example=failureExample();
+assert(example.disabled.before.path.includes('R4'));
+assert(!example.disabled.after.path.includes('R4'));
+assert(example.disabled.road.changed);
+assert(example.disabled.road.after.distance>example.disabled.road.before.distance);
+assert.deepEqual(example.disabled.road.before.position,example.disabled.road.after.position);
+assert.equal(example.disabled.before.load,example.disabled.after.load);
+assert.deepEqual(example.restored.road.before,example.disabled.road.after);
+assert.deepEqual(example.restored.road.after,example.disabled.road.before);
+assert(example.restored.after.path.includes('R4'));
+assert.notStrictEqual(example.restored.road.before.path,example.disabled.road.after.path);
+
+const delivery=compareDelivery();
+assert.equal(delivery.udp.lost,1);
+assert.equal(delivery.udp.retries,0);
+assert.equal(delivery.udp.delivered,0);
+assert.deepEqual(delivery.tcp.handshake,['SYN →','← SYN-ACK','ACK →']);
+assert.equal(delivery.tcp.lost,1);
+assert.equal(delivery.tcp.retries,1);
+assert.equal(delivery.tcp.delivered,1);
+assert(delivery.tcp.acknowledged);
+assert.deepEqual(compareDelivery(),delivery);
+assert(loadEstimate(90).delay>loadEstimate(10).delay);
+assert.equal(loadEstimate(90).capacity,loadEstimate(10).capacity);
+assert.equal(JSON.stringify({road:main.sim.road.snapshot(),time:main.sim.time,nodes:main.sim.nodes,stats:main.sim.stats}),userState);
+
+assert.equal(phases.length,5);
+assert(phases.every(phase=>concepts.filter(concept=>concept.phase===phase.id).length>=7));
+assert.equal(new Set(concepts.map(concept=>concept.title)).size,concepts.length);
+assert(concepts.every(concept=>['In the city','Interactive example','Concept only'].includes(concept.mode)));
+console.log(`Learning checks passed: ${concepts.length} concepts, five phases, failure/recovery snapshots, independent examples, deterministic transport comparison and load-dependent delay.`);
