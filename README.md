@@ -1,5 +1,7 @@
 # Emergency Route
 
+**Live Website:** [https://karthikrajj.github.io/ER-CN/](https://karthikrajj.github.io/ER-CN/)
+
 An educational website with a focused 3D demonstration of an ambulance communicating with a hospital while network nodes fail and recover. The ambulance now changes its physical road route when a failed node blocks its way. All places, messages and vehicles are fictitious. No real emergency, GPS, traffic-control or medical services are contacted.
 
 ## Run locally
