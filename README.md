@@ -31,7 +31,7 @@ The amber line represents the ambulance's current road route; it changes with th
 
 The pages have bookmarkable hash URLs and work without server-side routing. Navigation pauses the simulation and preserves its in-memory state; returning to the city does not automatically resume the vehicle. Browser reload starts a fresh session. Lesson experiments do not alter the main simulation.
 
-## Project structure
+## Project structure.
 
 - `dist/index.html`, `dist/app.css`: shared navigation and the focused simulation interface.
 - `dist/pages.mjs`, `dist/pages.css`: the four learning pages and their interactions.
