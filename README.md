@@ -725,13 +725,11 @@ The simulation is intended exclusively for education, demonstration, experimenta
 👥 Team
 
 Emergency Route Team
-
-Member| Role
-Mariam Skaria| Team Member
-Layel K Manoj| Team Member
-Karthik Raj| Team Member
-Junia Alex| Team Member
-Malavika Krishnan| Team Member
+Mariam Skaria
+Layel K Manoj
+Karthik Raj
+Junia Alex
+Malavika Krishnan
 
 👨‍💻 Team
 
