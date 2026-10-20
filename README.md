@@ -726,7 +726,7 @@ The simulation is intended exclusively for education, demonstration, experimenta
 
 Emergency Route Team
 Mariam Skaria
-Layel K Manoj
+Layel K Manoj<a href="https://www.linkedin.com/in/layelkmanoj/">
 Karthik Raj
 Junia Alex
 Malavika Krishnan
